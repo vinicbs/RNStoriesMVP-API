@@ -3,9 +3,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const app = express()
-const port = 3000;
-
+const app = express();
+const HttpResponse = require('./src/middlewares/HttpResponse')
+const authRoute = require('./src/routes/auth');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -38,6 +38,10 @@ app.get('/', (req, res) => {
 })
 
 // Routes
+app.use('/auth', authRoute);
+
+// Http Responses Middleware
+app.use(HttpResponse);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -45,5 +49,5 @@ app.use(function (req, res, next) {
 });
 
 app.listen(process.env.PORT || app.get('port'), () => {
-    console.log(`RNStoriesMVP API listening on port ${port}!`)
+    console.log(`RNStoriesMVP API listening on port ${process.env.PORT}!`)
 })
