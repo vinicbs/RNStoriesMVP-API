@@ -19,13 +19,16 @@ const listByUser = (req, res, next) => {
         .then(stories => {
             next(new SuccessResponse(200, 'stories list', stories));
         }).catch(err => {
-            console.log(err)
             next(new ErrorResponse(400, err.name, err.data));
         })
 }
 
+const upload = (req, res, next) => {
+    next(new SuccessResponse(200, 'file succefully uploaded', { url: req.file.cloudStoragePublicUrl }))
+}
 
 module.exports = {
     create,
-    listByUser
+    listByUser,
+    upload
 }

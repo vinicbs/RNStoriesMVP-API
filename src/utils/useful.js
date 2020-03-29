@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const Multer = require('multer');
 
 // Creates an userId token
 const createToken = (userId) => {
@@ -45,9 +46,15 @@ const comparePassword = (password, hashPassword) => {
     })
 }
 
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 * 1024 // 5mb
+});
+
 module.exports = {
     createToken: createToken,
     getUserIdInToken: getUserIdInToken,
     getHashedPassword: getHashedPassword,
-    comparePassword: comparePassword
+    comparePassword: comparePassword,
+    multer: multer
 };
