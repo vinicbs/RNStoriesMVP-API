@@ -13,21 +13,6 @@ module.exports = class User extends BaseModel {
         return ['password']
     }
 
-    static get jsonSchema() {
-        return {
-            type: 'object',
-            required: ['name', 'email', 'password'],
-            properties: {
-                id: { type: 'integer' },
-                name: { type: 'string', minLength: 1, maxLength: 150 },
-                email: { type: 'string', minLength: 1, maxLength: 150 },
-                photo: { type: 'string', minLength: 1, maxLength: 500 },
-                password: { type: 'string', minLength: 1, maxLength: 250 },
-                created_at: { type: 'integer' }
-            }
-        };
-    }
-
     // static get relationMappings() {
     //     return {
     //         stories: {
