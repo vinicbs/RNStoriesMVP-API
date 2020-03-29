@@ -6,6 +6,7 @@ const logger = require('morgan');
 const app = express();
 const HttpResponse = require('./src/middlewares/HttpResponse')
 const authRoute = require('./src/routes/auth.route');
+const storiesRoute = require('./src/routes/stories.route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/auth', authRoute);
+app.use('/stories', storiesRoute);
 
 // Http Responses Middleware
 app.use(HttpResponse);

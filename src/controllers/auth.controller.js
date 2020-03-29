@@ -20,10 +20,13 @@ const signUp = (req, res, next) => {
 
 const signIn = (req, res, next) => {
     const { email, password } = req.body;
-    User.query().select().where('email', '=', email).first().then(result => {
-        if (result) {
-            comparePassword(password, result.password)
-                .then(() => next(new SuccessResponse(200, 'Login Success', result)))
+    User.query().select().where('email', '=', email).first().then(user => {
+        if (user) {
+            comparePassword(password, user.password)
+                .then(() => {
+                    user.token = createToken(user.id)
+                    next(new SuccessResponse(200, 'Login Success', user))
+                })
                 .catch(() => next(new ErrorResponse(400, 'Password incorrect')))
         } else next(new ErrorResponse(400, 'User not found'));
     }).catch(err => {

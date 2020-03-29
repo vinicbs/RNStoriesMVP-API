@@ -7,8 +7,6 @@ const createToken = (userId) => {
     return token;
 }
 
-
-
 // Get session ID on token
 const getUserIdInToken = (token) => {
     var result = '';

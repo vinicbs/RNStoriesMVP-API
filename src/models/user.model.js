@@ -1,8 +1,9 @@
-const Knex = require('knex')
-const connection = require('../../knexfile')
-const BaseModel = require('./base.model')
-const knexConnection = Knex(connection)
-BaseModel.knex(knexConnection)
+const Knex = require('knex');
+const connection = require('../../knexfile');
+const BaseModel = require('./base.model');
+const Story = require('./story.model');
+const knexConnection = Knex(connection);
+BaseModel.knex(knexConnection);
 
 module.exports = class User extends BaseModel {
     static get tableName() {
@@ -13,16 +14,16 @@ module.exports = class User extends BaseModel {
         return ['password']
     }
 
-    // static get relationMappings() {
-    //     return {
-    //         stories: {
-    //             relation: BaseModel.HasManyRelation,
-    //             modelClass: Story,
-    //             join: {
-    //                 from: 'ideas.id',
-    //                 to: 'comments.ideas_id'
-    //             }
-    //         }
-    //     }
-    // }
+    static get relationMappings() {
+        return {
+            stories: {
+                relation: BaseModel.HasManyRelation,
+                modelClass: Story,
+                join: {
+                    from: 'users.id',
+                    to: 'stories.user_id'
+                }
+            }
+        }
+    }
 }
