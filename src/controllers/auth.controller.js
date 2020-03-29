@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/user.model');
 const { getHashedPassword, comparePassword, createToken } = require('../utils/useful')
 const ErrorResponse = require('../http/ErrorResponse');
 const SuccessResponse = require('../http/SuccessResponse');

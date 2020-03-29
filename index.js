@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const app = express();
 const HttpResponse = require('./src/middlewares/HttpResponse')
-const authRoute = require('./src/routes/auth');
+const authRoute = require('./src/routes/auth.route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
