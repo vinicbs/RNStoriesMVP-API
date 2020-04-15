@@ -15,8 +15,11 @@ function getPublicUrl(filename, folder) {
 const sendUploadToGCS = (req, res, next) => {
     const bucket = storage.bucket(process.env.GOOGLE_STORAGE_BUCKET)
     if (!req.file || !req.query.folder) {
+        console.log(req.query.folder)
+        console.log(req.file)
         return next(new ErrorResponse(400, 'No file or no folder specified'));
     }
+    console.log(req.file.originalname)
     const gcsname = Date.now() + req.file.originalname
     const file = bucket.file(`app/${req.query.folder}/${gcsname}`)
 

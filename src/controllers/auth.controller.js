@@ -34,7 +34,36 @@ const signIn = (req, res, next) => {
     })
 }
 
+const refreshToken = (req, res, next) => {
+    User.query().findById(req.body.authUser).then(user => {
+        if (user) {
+            user.token = createToken(user.id);
+            next(new SuccessResponse(200, 'Login Success', user));
+        } else {
+            next(new ErrorResponse(500, 'Server Error'));
+        }
+    }).catch(err => {
+        next(new ErrorResponse(500, 'Server Error'));
+    })
+}
+
+const uploadPhoto = (req, res, next) => {
+    User.query().findById(req.body.authUser).patch({
+        photo: req.file.cloudStoragePublicUrl
+    }).then(user => {
+        if (user) {
+            next(new SuccessResponse(200, 'Upload Success', req.file.cloudStoragePublicUrl));
+        } else {
+            next(new ErrorResponse(500, 'Server Error'));
+        }
+    }).catch(err => {
+        next(new ErrorResponse(500, 'Server Error'));
+    })
+}
+
 module.exports = {
     signUp,
-    signIn
+    signIn,
+    refreshToken,
+    uploadPhoto
 }

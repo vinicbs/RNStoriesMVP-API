@@ -46,7 +46,8 @@ const comparePassword = (password, hashPassword) => {
     })
 }
 
-const multer = Multer({
+
+ const multer = Multer({
     storage: Multer.MemoryStorage,
     fileSize: 5 * 1024 * 1024 // 5mb
 });
@@ -56,5 +57,5 @@ module.exports = {
     getUserIdInToken: getUserIdInToken,
     getHashedPassword: getHashedPassword,
     comparePassword: comparePassword,
-    multer: multer
+    multer: multer,
 };

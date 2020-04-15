@@ -16,6 +16,7 @@ const listByUser = (req, res, next) => {
         .joinRelated('stories')
         .select('users.*', User.knex().raw(`JSON_AGG(stories.*) AS stories`))
         .groupBy('users.id')
+        .page(req.query.page, req.query.page_size)
         .then(stories => {
             next(new SuccessResponse(200, 'stories list', stories));
         }).catch(err => {
