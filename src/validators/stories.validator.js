@@ -12,7 +12,14 @@ const listValidator = () => {
     ]
 }
 
+const uploadValidator = () => {
+    return [
+        query('type').exists().isIn(['video', 'image'])
+    ]
+}
+
 module.exports = {
     createValidator,
-    listValidator
+    listValidator,
+    uploadValidator
 }

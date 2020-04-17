@@ -44,6 +44,11 @@ exports.up = function (db) {
 			notNull: true,
 			length: 500
 		},
+		mediaType: {
+			type: 'string',
+			notNull: true,
+			length: 10
+		},
 		updated_at: {
 			type: 'timestamp',
 			notNull: true,

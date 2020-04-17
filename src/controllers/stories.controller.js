@@ -25,7 +25,11 @@ const listByUser = (req, res, next) => {
 }
 
 const upload = (req, res, next) => {
-    next(new SuccessResponse(200, 'file succefully uploaded', { url: req.file.cloudStoragePublicUrl }))
+    Story.query().insert({ media: req.file.cloudStoragePublicUrl, user_id: req.body.authUser, mediaType: req.query.type }).then(story => {
+        next(new SuccessResponse(200, 'story created', story));
+    }).catch(err => {
+        next(new ErrorResponse(400, err.name, err.data));
+    })
 }
 
 module.exports = {
