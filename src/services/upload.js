@@ -1,11 +1,11 @@
 const { Storage } = require('@google-cloud/storage');
 const ErrorResponse = require('../http/ErrorResponse');
 const GOOGLE_CLOUD_PROJECT_ID = process.env.GOOGLE_STORAGE_PROJECT_ID;
-const GOOGLE_CLOUD_KEYFILE = './googleStorageKey.json';
+const GOOGLE_CLOUD_KEYFILE = JSON.parse(process.env.GOOGLE_STORAGE_JSON);
 
 const storage = new Storage({
     projectId: GOOGLE_CLOUD_PROJECT_ID,
-    keyFilename: GOOGLE_CLOUD_KEYFILE,
+    credentials: GOOGLE_CLOUD_KEYFILE,
 });
 
 function getPublicUrl(filename, folder) {
