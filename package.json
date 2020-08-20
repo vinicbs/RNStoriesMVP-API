@@ -22,7 +22,7 @@
   "homepage": "https://github.com/vinicbs/RNStoriesMVP-API#readme",
   "dependencies": {
     "@google-cloud/storage": "^4.7.0",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "db-migrate": "^0.11.6",
     "db-migrate-pg": "^1.0.0",
